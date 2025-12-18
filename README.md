@@ -67,7 +67,8 @@ CARGA
 
 Marco-Currais/
 ├── README.md
-├── MVP_Engenharia_Dados.ipynb
+├── MVP_Engenharia_de_Dados_Titanic.ipynb
+├── MVP_Engenharia_de_Dados_v5.ipynb - Colab.pdf
 ├── train.csv
 └── test.csv
 
@@ -76,23 +77,6 @@ Marco-Currais/
 ### Pré-requisitos
 - Conta no Databricks Community Edition
 - Cluster Spark configurado
-
-### Passos
-
-1. Clone o repositório
-git clone https://github.com/marcoantonioclpz/Marco-Currais.git
-
-2. Importe o notebook no Databricks
-   - Vá em Workspace → Import
-   - Selecione MVP_Engenharia_Dados.ipynb
-
-3. Faça upload dos dados
-   - Vá em Data → Create Table
-   - Upload train.csv
-
-4. Execute o notebook
-   - Conecte a um cluster
-   - Execute todas as células
 
 ## 📖 Documentação
 
@@ -165,8 +149,3 @@ Dataset: Titanic - Machine Learning from Disaster (Kaggle - Domínio Público)
 
 Marco Antonio Currais Lopez
 - Pós-Graduação em Data Science & Analytics - PUC-Rio
-- GitHub: https://github.com/marcoantonioclpz
-
-- Professor e equipe da disciplina de Engenharia de Dados
-- Comunidade Kaggle pelo dataset
-- Databricks pela plataforma Community Edition
