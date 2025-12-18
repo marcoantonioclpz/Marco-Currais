@@ -1,0 +1,172 @@
+# 🚢 MVP - Engenharia de Dados: Análise do Titanic
+
+## 📋 Sobre o Projeto
+
+Projeto desenvolvido para a disciplina de **Engenharia de Dados** da Pós-Graduação em Data Science & Analytics da PUC-Rio.
+
+**Objetivo:** Construir um pipeline completo de dados para analisar os fatores que influenciaram a sobrevivência dos passageiros do Titanic.
+
+**Aluno:** Marco Antonio Currais Lopez  
+**Data:** Dezembro/2025
+
+## 🎯 Perguntas de Pesquisa
+
+1. Qual foi a taxa geral de sobrevivência no Titanic?
+2. Como a classe socioeconômica influenciou na sobrevivência?
+3. Qual a diferença de sobrevivência entre homens e mulheres?
+4. Qual a relação entre idade e sobrevivência?
+
+## 📊 Principais Resultados
+
+| Métrica | Resultado |
+|---------|-----------|
+| Taxa Geral de Sobrevivência | 38,38% |
+| Classe 1ª | 62,96% |
+| Classe 3ª | 24,24% |
+| Mulheres | 74,20% |
+| Homens | 18,89% |
+| Diferença por Sexo | 55,31 pontos percentuais |
+
+### Insights Principais
+
+- Sexo foi o fator mais determinante - Mulheres tiveram 3,93x mais chances de sobreviver
+- Classe social teve forte impacto - 1ª classe teve 2,6x mais chances que 3ª classe
+- Idade teve impacto moderado - Diferença de apenas 2,29 anos na média
+
+## 🏗️ Arquitetura do Projeto
+
+### Modelo Dimensional - Esquema Estrela
+      Dim_Passageiro (891 registros)
+              |
+              | Passageiro_Key
+              |
+        Fact_Sobrevivencia (891 registros)
+              |
+              |-- Classe_Key ---- Dim_Classe (3 registros)
+              |
+              |-- Embarque_Key -- Dim_Embarque (4 registros)
+
+### Pipeline ETL
+
+EXTRAÇÃO
+   └─ train.csv (Kaggle) → Upload Databricks
+
+TRANSFORMAÇÃO
+   ├─ Análise de qualidade (nulos, duplicatas, inconsistências)
+   ├─ Imputação de valores ausentes
+   ├─ Criação de atributos derivados
+   └─ Enriquecimento contextual
+
+CARGA
+   ├─ Dim_Passageiro (características demográficas)
+   ├─ Dim_Classe (classes socioeconômicas)
+   ├─ Dim_Embarque (portos de embarque)
+   └─ Fact_Sobrevivencia (eventos de sobrevivência)
+
+## 📁 Estrutura do Repositório
+
+Marco-Currais/
+├── README.md
+├── MVP_Engenharia_Dados.ipynb
+├── train.csv
+└── test.csv
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+- Conta no Databricks Community Edition
+- Cluster Spark configurado
+
+### Passos
+
+1. Clone o repositório
+git clone https://github.com/marcoantonioclpz/Marco-Currais.git
+
+2. Importe o notebook no Databricks
+   - Vá em Workspace → Import
+   - Selecione MVP_Engenharia_Dados.ipynb
+
+3. Faça upload dos dados
+   - Vá em Data → Create Table
+   - Upload train.csv
+
+4. Execute o notebook
+   - Conecte a um cluster
+   - Execute todas as células
+
+## 📖 Documentação
+
+### Modelo de Dados
+
+#### Tabela Fato: Fact_Sobrevivencia
+| Coluna | Tipo | Descrição |
+|--------|------|-----------|
+| Sobrevivencia_Key | INTEGER | Chave primária (PK) |
+| Passageiro_Key | INTEGER | FK → Dim_Passageiro |
+| Classe_Key | INTEGER | FK → Dim_Classe |
+| Embarque_Key | INTEGER | FK → Dim_Embarque |
+| Survived | INTEGER | 0 = Não, 1 = Sim |
+| Fare | DECIMAL | Tarifa paga (£) |
+
+#### Dimensão: Dim_Passageiro (891 registros)
+- Passageiro_Key (PK)
+- PassengerId, Name, Sex, Age
+- Faixa_Etaria, Tamanho_Familia, Deck
+
+#### Dimensão: Dim_Classe (3 registros)
+- Classe_Key (PK)
+- Pclass, Classe_Descricao
+- Localizacao_Deck, Tarifa_Media
+
+#### Dimensão: Dim_Embarque (4 registros)
+- Embarque_Key (PK)
+- Embarked_Code, Porto_Nome
+- Pais, Ordem_Embarque
+
+## 📊 Análises Realizadas
+
+### 1. Qualidade de Dados
+- Análise de valores nulos (Age: 19,87%, Cabin: 77,1%)
+- Verificação de duplicatas (0 encontradas)
+- Análise de inconsistências (valores válidos confirmados)
+
+### 2. Análise Exploratória
+- Taxa geral de sobrevivência
+- Sobrevivência por classe socioeconômica
+- Sobrevivência por sexo
+- Relação entre idade e sobrevivência
+
+### 3. Estatísticas Descritivas
+- Médias, medianas e desvios-padrão
+- Distribuições por categoria
+- Correlações entre variáveis
+
+## 🔗 Links Úteis
+
+- Notebook Completo: ./MVP_Engenharia_Dados.ipynb
+- Competição Kaggle: https://www.kaggle.com/competitions/titanic
+- Dataset: ./train.csv
+
+## 🛠️ Tecnologias Utilizadas
+
+- Plataforma: Databricks Community Edition
+- Linguagens: SQL, Python
+- Armazenamento: DBFS (Databricks File System)
+- Modelagem: Esquema Estrela (Star Schema)
+- Arquitetura: Medallion (Bronze → Silver → Gold)
+
+## 📝 Licença
+
+Este projeto foi desenvolvido para fins educacionais como parte do MVP da disciplina de Engenharia de Dados.
+
+Dataset: Titanic - Machine Learning from Disaster (Kaggle - Domínio Público)
+
+## 👤 Autor
+
+Marco Antonio Currais Lopez
+- Pós-Graduação em Data Science & Analytics - PUC-Rio
+- GitHub: https://github.com/marcoantonioclpz
+
+- Professor e equipe da disciplina de Engenharia de Dados
+- Comunidade Kaggle pelo dataset
+- Databricks pela plataforma Community Edition
