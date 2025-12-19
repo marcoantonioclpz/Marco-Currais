@@ -71,6 +71,7 @@ Marco-Currais/Titanic/
 ├── MVP_Engenharia_de_Dados_v5.ipynb - Colab.pdf
 ├── train.csv
 └── test.csv
+└── titanic.csv
 
 ### Pré-requisitos
 - Conta no Databricks Community Edition
